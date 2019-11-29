@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { GetBlockResult } from 'eosjs/dist/eosjs-rpc-interfaces';
+import './BlockSegment.css';
 
-export const BlockSegment: React.FC = ({ blockInfo }) => {
-  const [expanded, setExpanded] = useState(false);
+interface BlockSegmentProps {
+  blockInfo: GetBlockResult;
+}
+
+export const BlockSegment: React.FC<BlockSegmentProps> = ({ blockInfo }: BlockSegmentProps) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
 
   const expandRawData = () => setExpanded(!expanded);
 
@@ -13,7 +19,7 @@ export const BlockSegment: React.FC = ({ blockInfo }) => {
         <div className="three wide column">{blockInfo.transactions ? blockInfo.transactions.length : null}</div>
       </div>
       {expanded ? (
-        <div className="ui segment" style={{ maxHeight: '200px', overflow: 'auto' }}>
+        <div className="ui segment rawDisplayContainer">
           <pre>{JSON.stringify(blockInfo, null, 2)}</pre>
         </div>
       ) : null}

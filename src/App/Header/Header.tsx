@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import './Header.css';
 
-export const Header: React.FC = ({ loading, loadBlockInformation }) => {
+interface HeaderProps {
+  loading: boolean;
+  loadBlockInformation: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ loading, loadBlockInformation }: HeaderProps) => {
   const handleOnClick = () => loadBlockInformation();
 
   return (

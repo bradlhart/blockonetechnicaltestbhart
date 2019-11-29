@@ -1,6 +1,7 @@
 import Promise from 'bluebird';
-import React, { useState, useEffect } from 'react';
-import { JsonRpc, RpcError } from 'eosjs';
+import React, { useState, ReactElement } from 'react';
+import { JsonRpc } from 'eosjs';
+import { GetBlockResult } from 'eosjs/dist/eosjs-rpc-interfaces';
 import './App.css';
 
 import { Header } from './Header/Header';
@@ -9,46 +10,42 @@ import { BlockSegment } from './List/BlockSegment/BlockSegment';
 
 const rpc = new JsonRpc('https://api.eosnewyork.io');
 
-const App: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [recentBlockSegments, setRecentBlockSegments] = useState([]);
+export const App: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [rowCount] = useState<number>(10);
+  const [recentBlockSegments, setRecentBlockSegments] = useState<ReactElement<any>[]>([]);
 
   const loadBlockInformation = async () => {
     setLoading(true);
     setRecentBlockSegments([]);
-    const chainInfo = await rpc.get_info();
-    const recentBlockNum = chainInfo.last_irreversible_block_num;
-    const rowCount = 10;
-    const blockNumbers = [];
-    for (let i = recentBlockNum; i > recentBlockNum - rowCount; i--) blockNumbers.push(i);
-    const blockSegments = await Promise.mapSeries(blockNumbers, (blockNum: number) =>
+    const blockNumbers = findLastBlockNumByCount(rowCount);
+    const blockSegments: ReactElement<any>[] = await Promise.mapSeries(blockNumbers, (blockNum: number) =>
       createBlockSegmentComponent(blockNum)
     );
     setRecentBlockSegments(blockSegments);
     setLoading(false);
   };
 
-  const createBlockSegmentComponent = blockNum => {
-    return new Promise(resolve => {
-      rpc
-        .get_block(blockNum)
-        .then(blockInfo => {
-          return resolve(<BlockSegment className="ui segment" key={blockInfo.block_num} blockInfo={blockInfo} />);
-        })
-        .catch(() => {
-          return resolve(<div className="ui segment">Error Retrieving Block Number {blockNum}</div>);
-        });
-    });
+  const findLastBlockNumByCount = async (count: number) => {
+    const chainInfo = await rpc.get_info();
+    const recentBlockNum = chainInfo.last_irreversible_block_num;
+    const blockNumbers = [];
+    for (let i = recentBlockNum; i > recentBlockNum - count; i--) blockNumbers.push(i);
+    return blockNumbers;
+  };
+
+  const createBlockSegmentComponent = async (blockNum: number) => {
+    const blockInfo: GetBlockResult  = await rpc.get_block(blockNum);
+    return <BlockSegment key={blockInfo.block_num} blockInfo={blockInfo} />;
+    //return <div className="ui segment">Error Retrieving Block Number {blockNum}</div>;
   };
 
   return (
     <div className="ui container">
-      <div className="ui segment" style={{ margin: '20px' }}>
+      <div className="ui segment rootSegment">
         <Header loading={loading} loadBlockInformation={loadBlockInformation} />
         <List loading={loading} blockList={recentBlockSegments} />
       </div>
     </div>
   );
 };
-
-export default App;
