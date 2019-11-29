@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { JsonRpc, RpcError } from 'eosjs';
 import './App.css';
 
-import { BlockSegment } from './BlockSegment/BlockSegment';
+import { Header } from './Header/Header';
+import { List } from './List/List';
+import { BlockSegment } from './List/BlockSegment/BlockSegment';
 
 const rpc = new JsonRpc('https://api.eosnewyork.io');
 
@@ -42,27 +44,8 @@ const App: React.FC = () => {
   return (
     <div className="ui container">
       <div className="ui segment" style={{ margin: '20px' }}>
-        <div className="ui two column grid">
-          <div className="fourteen wide column">
-            <h2 className="ui header">Block.one Web Application Developer Technical Test</h2>
-          </div>
-          <div className="two wide column">
-            <div className={'ui button ' + (loading ? 'loading disabled' : undefined)} onClick={loadBlockInformation}>
-              LOAD
-            </div>
-          </div>
-        </div>
-
-        <div className="ui segments">
-          <div className="ui segment">
-            <div className="ui three column divided grid" style={{ fontWeight: 'bold' }}>
-              <div className="ten wide column">Hash</div>
-              <div className="three wide column">Timestamp</div>
-              <div className="three wide column">Actions</div>
-            </div>
-          </div>
-          {loading ? <div className="ui segment center aligned">Fetching Data...</div> : recentBlockSegments}
-        </div>
+        <Header loading={loading} loadBlockInformation={loadBlockInformation} />
+        <List loading={loading} blockList={recentBlockSegments} />
       </div>
     </div>
   );
