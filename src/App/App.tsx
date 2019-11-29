@@ -14,27 +14,36 @@ export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [rowCount] = useState<number>(10);
+  const [lastBlockNum, setLastBlockNum] = useState<number|undefined>(undefined);
   const [recentBlockSegments, setRecentBlockSegments] = useState<ReactElement<any>[]>([]);
 
   const loadBlockInformation = async () => {
     setLoading(true);
-    setRecentBlockSegments([]);
-    const blockNumbers: number[] | undefined = await findLastBlockNumByCount(rowCount);
-    if (!blockNumbers) return;
-    const blockSegments: ReactElement<any>[] = await Promise.mapSeries(blockNumbers, (blockNum: number) =>
+    const blockNum: number | undefined = await findLastBlockNumByCount();
+    if (!blockNum) return;
+    const blockNumbers = propagateBlockNumberList(blockNum);
+    let newBlockSegments: ReactElement<any>[] = await Promise.mapSeries(blockNumbers, (blockNum: number) =>
       createBlockSegmentComponent(blockNum)
     );
+    const blockSegments = newBlockSegments.concat(recentBlockSegments).slice(0, 10);
+    setLastBlockNum(blockNum);
     setRecentBlockSegments(blockSegments);
     setLoading(false);
   };
 
-  const findLastBlockNumByCount = async (count: number) => {
+  const propagateBlockNumberList = (blockNum: number) => {
+    const blockNumbers = [];
+    let amount = 0;
+    if (lastBlockNum) amount = blockNum - lastBlockNum;
+    else amount = rowCount;
+    for (let i = blockNum; i > blockNum - amount; i--) blockNumbers.push(i);
+    return blockNumbers;
+  };
+
+  const findLastBlockNumByCount = async () => {
     try {
       const chainInfo = await rpc.get_info();
-      const recentBlockNum = chainInfo.last_irreversible_block_num;
-      const blockNumbers = [];
-      for (let i = recentBlockNum; i > recentBlockNum - count; i--) blockNumbers.push(i);
-      return blockNumbers;
+      return chainInfo.last_irreversible_block_num;
       } catch (e) {
         setError(`Error Retrieving Chain Info: ${e.message}`);
         if (e instanceof RpcError)
