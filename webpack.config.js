@@ -10,8 +10,7 @@ module.exports = (env, argv) => {
     devtool: argv.mode === 'production' ? false : 'eval-source-map',
     output: {
       path: argv.mode === 'production' ? path.resolve('dist') : path.resolve('tmp'),
-      filename: 'app.bundle.js',
-      publicPath: '/'
+      filename: 'app.bundle.js'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

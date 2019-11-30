@@ -14,12 +14,7 @@ exports[`Header renders correctly with default props 1`] = `
     </h2>
   </div>
   <div
-    className="sixteen wide mobile four wide tablet two wide computer column"
-    style={
-      Object {
-        "textAlign": "right",
-      }
-    }
+    className="sixteen wide mobile four wide tablet two wide computer column loadButtonAlign"
   >
     <div
       className="ui button "
@@ -46,12 +41,7 @@ exports[`Header renders correctly with props in loading state 1`] = `
     </h2>
   </div>
   <div
-    className="sixteen wide mobile four wide tablet two wide computer column"
-    style={
-      Object {
-        "textAlign": "right",
-      }
-    }
+    className="sixteen wide mobile four wide tablet two wide computer column loadButtonAlign"
   >
     <div
       className="ui button loading disabled"
