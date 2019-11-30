@@ -1,7 +1,7 @@
 import React from 'react';
 import './ListHeader.css';
 
-export const ListHeader: React.FC = () => {
+const ListHeader: React.FC = () => {
   return (
     <div className="ui segment">
       <div className="ui three column divided grid listHeader listContent">
@@ -12,3 +12,5 @@ export const ListHeader: React.FC = () => {
     </div>
   );
 };
+
+export default ListHeader;

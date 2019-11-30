@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List renders correctly with default props 1`] = `
+<div
+  className="ui segments"
+>
+  <ListHeader />
+  <div
+    className="ui segment center aligned"
+  >
+    No Data To Display, Click Load To Retrieve Data
+  </div>
+</div>
+`;
+
+exports[`List renders correctly with props containing data 1`] = `
+<div
+  className="ui segments"
+>
+  <ListHeader />
+  <BlockSegment
+    blockInfo={
+      Object {
+        "action_mroot": "action_mroot",
+        "block_num": 0,
+        "confirmed": 0,
+        "id": "id",
+        "previous": "previous",
+        "producer": "producer",
+        "producer_signature": "producer_signature",
+        "ref_block_prefix": 0,
+        "schedule_version": 0,
+        "timestamp": "timestamp",
+        "transaction_mroot": "transaction_mroot",
+      }
+    }
+    key="id"
+  />
+</div>
+`;
+
+exports[`List renders correctly with props in error state 1`] = `
+<div
+  className="ui segments"
+>
+  <ListHeader />
+  <div
+    className="ui segment center aligned"
+  >
+    Error Retrieving Chain Info:
+  </div>
+</div>
+`;
+
+exports[`List renders correctly with props in loading state 1`] = `
+<div
+  className="ui segments"
+>
+  <ListHeader />
+  <div
+    className="ui segment center aligned"
+  >
+    Fetching Data...
+  </div>
+</div>
+`;

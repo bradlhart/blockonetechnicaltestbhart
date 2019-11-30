@@ -14,17 +14,23 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
+    "@testing-library/react": "^9.3.2",
     "@types/bluebird": "^3.5.29",
+    "@types/enzyme": "^3.10.3",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.14",
     "@types/react": "16.9.13",
     "@types/react-dom": "16.9.4",
+    "@types/react-test-renderer": "^16.9.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "^3.4.5",
     "css-loader": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^6.7.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -34,6 +40,7 @@
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
     "regenerator-runtime": "^0.13.3",
     "style-loader": "^1.0.0",
     "typescript": "3.7.2",
@@ -46,6 +53,7 @@
     "serve": "webpack-dev-server --mode development",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "build": "webpack --mode production"
   },
   "babel": {
@@ -74,6 +82,10 @@
     }
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/test-shim.js",
+      "<rootDir>/test-setup.js"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -88,7 +100,10 @@
       "^.+\\.[t|j]sx?$": "babel-jest"
     },
     "testMatch": [
-      "**/*.spec.(ts|tsx|js)"
+      "**/*.test.(ts|tsx|js)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ]
   },
   "browserslist": {

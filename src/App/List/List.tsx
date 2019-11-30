@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import './List.css';
 
-import { ListHeader } from './ListHeader/ListHeader';
+import ListHeader from './ListHeader/ListHeader';
 
 interface ListProps {
   loading: boolean;
@@ -9,7 +9,7 @@ interface ListProps {
   blockList: ReactElement<any>[];
 }
 
-export const List: React.FC<ListProps> = ({ loading, errorMsg, blockList }: ListProps) => {
+const List: React.FC<ListProps> = ({ loading, errorMsg, blockList }: ListProps) => {
   return (
     <div className="ui segments">
       <ListHeader />
@@ -25,3 +25,5 @@ export const List: React.FC<ListProps> = ({ loading, errorMsg, blockList }: List
     </div>
   );
 };
+
+export default List;

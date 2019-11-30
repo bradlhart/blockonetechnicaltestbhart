@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlockSegment renders correctly with default props (with transactions) 1`] = `
+<div
+  className="ui segment"
+  data-testid="rowContainer"
+  onClick={[Function]}
+>
+  <div
+    className="ui three column divided grid listContent"
+  >
+    <div
+      className="seven wide mobile eight wide tablet ten wide computer column"
+    />
+    <div
+      className="five wide mobile five wide tablet four wide computer column"
+    />
+    <div
+      className="four wide mobile three wide tablet two wide computer column"
+    >
+      0
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BlockSegment renders correctly with default props (without transactions) 1`] = `
+<div
+  className="ui segment"
+  data-testid="rowContainer"
+  onClick={[Function]}
+>
+  <div
+    className="ui three column divided grid listContent"
+  >
+    <div
+      className="seven wide mobile eight wide tablet ten wide computer column"
+    >
+      id
+    </div>
+    <div
+      className="five wide mobile five wide tablet four wide computer column"
+    >
+      timestamp
+    </div>
+    <div
+      className="four wide mobile three wide tablet two wide computer column"
+    >
+      0
+    </div>
+  </div>
+</div>
+`;

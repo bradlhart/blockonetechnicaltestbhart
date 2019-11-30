@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListHeader renders correctly 1`] = `
+<div
+  className="ui segment"
+>
+  <div
+    className="ui three column divided grid listHeader listContent"
+  >
+    <div
+      className="seven wide mobile eight wide tablet ten wide computer column"
+    >
+      Hash
+    </div>
+    <div
+      className="five wide mobile five wide tablet four wide computer column"
+    >
+      Timestamp
+    </div>
+    <div
+      className="four wide mobile three wide tablet two wide computer column"
+    >
+      Actions
+    </div>
+  </div>
+</div>
+`;

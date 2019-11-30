@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly with default props 1`] = `
+<div
+  className="ui two column grid"
+>
+  <div
+    className="sixteen wide mobile twelve wide tablet fourteen wide computer column"
+  >
+    <h2
+      className="ui header"
+    >
+      Block.one Web Application Developer Technical Test
+    </h2>
+  </div>
+  <div
+    className="sixteen wide mobile four wide tablet two wide computer column"
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <div
+      className="ui button "
+      data-testid="loadButton"
+      onClick={[Function]}
+    >
+      LOAD
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders correctly with props in loading state 1`] = `
+<div
+  className="ui two column grid"
+>
+  <div
+    className="sixteen wide mobile twelve wide tablet fourteen wide computer column"
+  >
+    <h2
+      className="ui header"
+    >
+      Block.one Web Application Developer Technical Test
+    </h2>
+  </div>
+  <div
+    className="sixteen wide mobile four wide tablet two wide computer column"
+    style={
+      Object {
+        "textAlign": "right",
+      }
+    }
+  >
+    <div
+      className="ui button loading disabled"
+      data-testid="loadButton"
+      onClick={[Function]}
+    >
+      LOAD
+    </div>
+  </div>
+</div>
+`;
