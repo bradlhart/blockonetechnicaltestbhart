@@ -55,4 +55,10 @@ describe('propagateBlockNumberList', () => {
     const result = propagateBlockNumberList(6, 9, 10);
     expect(result).toEqual(expected);
   });
+
+  test('lastBlockNum, subsequent load over 10', () => {
+    const expected = [21, 20, 19, 18, 17, 16, 15, 14, 13, 12];
+    const result = propagateBlockNumberList(6, 21, 10);
+    expect(result).toEqual(expected);
+  })
 });

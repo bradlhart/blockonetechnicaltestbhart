@@ -54,7 +54,7 @@ export const findLastBlockNumByCount = async (setError: Dispatch<SetStateAction<
 export const propagateBlockNumberList = (lastBlockNum: number|undefined, blockNum: number, rowCount: number) => {
   const blockNumbers = [];
   let amount = 0;
-  if (lastBlockNum) amount = blockNum - lastBlockNum;
+  if (lastBlockNum && blockNum - lastBlockNum <= 9) amount = blockNum - lastBlockNum;
   else amount = rowCount;
   for (let i = blockNum; i > blockNum - amount; i--) blockNumbers.push(i);
   return blockNumbers;
